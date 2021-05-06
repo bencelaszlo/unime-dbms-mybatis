@@ -1,5 +1,6 @@
-package hu.bencelaszlo.mybatis.utils;
+package hu.bencelaszlo.mybatis.sqlsession;
 
+import hu.bencelaszlo.mybatis.utils.Constants;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.*;
 
@@ -10,8 +11,6 @@ import java.io.InputStream;
  * Singleton SQL-session factory class.
  */
 public class SessionFactory {
-    private static final String MYBATIS_CONFIG_FILE = "mybatis-config.xml";
-
     private SqlSessionFactory sqlSessionFactory;
 
     /**
@@ -22,7 +21,7 @@ public class SessionFactory {
     public SqlSessionFactory getSqlSessionFactory() {
         if (this.sqlSessionFactory == null) {
             try {
-                InputStream inputStream = Resources.getResourceAsStream(MYBATIS_CONFIG_FILE);
+                InputStream inputStream = Resources.getResourceAsStream(Constants.MYBATIS_CONFIG_FILE);
                 sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
             } catch (IOException ioe) {
                 ioe.printStackTrace();

@@ -1,6 +1,8 @@
-package hu.bencelaszlo.mybatis;
+package hu.bencelaszlo.mybatis.dao;
 
-import hu.bencelaszlo.mybatis.utils.SessionHandler;
+import hu.bencelaszlo.mybatis.entity.Car;
+import hu.bencelaszlo.mybatis.sqlsession.SessionHandler;
+import hu.bencelaszlo.mybatis.utils.Constants;
 
 import java.util.List;
 
@@ -24,7 +26,7 @@ public class CarDAO {
      * @param car the car
      */
     public void save(Car car) {
-        sessionHandler.insert("Car.insertCar", car, Car.class);
+        sessionHandler.insert(Constants.SQL_STATEMENT_INSERT_CAR, car, Car.class);
     }
 
     /**
@@ -33,7 +35,7 @@ public class CarDAO {
      * @param car the car
      */
     public void update(Car car) {
-        sessionHandler.update("Car.paintCar", car, Car.class);
+        sessionHandler.update(Constants.SQL_STATEMENT_UPDATE_PAINT_CAR, car, Car.class);
     }
 
     /**
@@ -43,7 +45,7 @@ public class CarDAO {
      * @param id the id
      */
     public void updateConditionally(int id) {
-        sessionHandler.update("Car.paintCarConditionally", id, int.class);
+        sessionHandler.update(Constants.SQL_STATEMENT_UPDATE_PAINT_CAR_CONDITIONALLY, id, int.class);
     }
 
     /**
@@ -52,14 +54,14 @@ public class CarDAO {
      * @param id the id
      */
     public void delete(Integer id) {
-        sessionHandler.delete("Car.deleteCar", id, int.class);
+        sessionHandler.delete(Constants.SQL_STATEMENT_DELETE_CAR, id, int.class);
     }
 
     /**
      * Cleans database, deletes every record.
      */
     public void cleanDatabase() {
-        sessionHandler.delete("Car.cleanDatabase");
+        sessionHandler.delete(Constants.SQL_STATEMENT_DELETE_CLEAN_DATABASE);
     }
 
     /**
@@ -69,7 +71,7 @@ public class CarDAO {
      * @return the data
      */
     public Car getData(Integer id) {
-        return sessionHandler.select("Car.selectCar", id, int.class);
+        return sessionHandler.select(Constants.SQL_STATEMENT_SELECT_CAR, id, int.class);
     }
 
     /**
@@ -78,6 +80,6 @@ public class CarDAO {
      * @return the all data
      */
     public List<Car> getAllData() {
-        return sessionHandler.select("Car.selectAllCar");
+        return sessionHandler.select(Constants.SQL_STATEMENT_SELECT_ALL_CAR);
     }
 }

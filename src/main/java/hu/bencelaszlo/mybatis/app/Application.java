@@ -1,4 +1,7 @@
-package hu.bencelaszlo.mybatis;
+package hu.bencelaszlo.mybatis.app;
+
+import hu.bencelaszlo.mybatis.dao.CarDAO;
+import hu.bencelaszlo.mybatis.entity.Car;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -7,13 +10,7 @@ import java.util.List;
 public class Application {
     public static void main(String[] args) throws ParseException {     
         CarDAO carDAO = new CarDAO();
-
-        // TODO: move contants to separate class
-        // TODO: move cars as a list to a separate class
-        // TODO: log every event in DAO
-        // TODO: log every car after every event
-        // TODO: singleton/static class for session management
-
+        
         try {
             System.out.println("Table is empty");
             // LIST CARS

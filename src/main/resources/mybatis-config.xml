@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <typeAliases>
-        <typeAlias type="hu.bencelaszlo.mybatis.Car" alias="car"/>
+        <typeAlias type="hu.bencelaszlo.mybatis.entity.Car" alias="car"/>
     </typeAliases>
     <environments default="development">
         <environment id="development">

@@ -1,6 +1,6 @@
-package hu.bencelaszlo.mybatis.utils;
+package hu.bencelaszlo.mybatis.sqlsession;
 
-import hu.bencelaszlo.mybatis.Car;
+import hu.bencelaszlo.mybatis.entity.Car;
 import org.apache.ibatis.session.SqlSession;
 
 import java.util.List;

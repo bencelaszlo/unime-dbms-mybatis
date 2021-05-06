@@ -1,4 +1,4 @@
-package hu.bencelaszlo.mybatis;
+package hu.bencelaszlo.mybatis.entity;
 
 import java.util.Date;
 
