@@ -13,7 +13,6 @@ public class Application {
         // TODO: log every event in DAO
         // TODO: log every car after every event
         // TODO: singleton/static class for session management
-        // TODO: singleton/static class for session factory management  (currently called CarDbSessionManagement)
 
         try {
             System.out.println("Table is empty");
