@@ -1,63 +1,83 @@
 package hu.bencelaszlo.mybatis;
 
-import hu.bencelaszlo.mybatis.utils.SessionFactory;
-import org.apache.ibatis.session.SqlSession;
+import hu.bencelaszlo.mybatis.utils.SessionHandler;
 
 import java.util.List;
 
+
+/**
+ * DAO for the car table.
+ */
 public class CarDAO {
-    private SessionFactory sessionFactory;
+    private SessionHandler sessionHandler;
 
+    /**
+     * Instantiates a new CarDAO instance.
+     */
     public CarDAO() {
-        this.sessionFactory = new SessionFactory();
+        this.sessionHandler = new SessionHandler();
     }
 
+    /**
+     * Saves a new car record to the database table.
+     *
+     * @param car the car
+     */
     public void save(Car car) {
-        SqlSession session = sessionFactory.getSqlSessionFactory().openSession();
-        session.insert("Car.insertCar", car);
-        session.commit();
-        session.close();
+        sessionHandler.insert("Car.insertCar", car, Car.class);
     }
 
+    /**
+     * Updates a car record.
+     *
+     * @param car the car
+     */
     public void update(Car car) {
-        SqlSession session = sessionFactory.getSqlSessionFactory().openSession();
-        session.update("Car.paintCar", car);
-        session.commit();
-        session.close();
+        sessionHandler.update("Car.paintCar", car, Car.class);
     }
 
+    /**
+     * Updates a car record by its conditionally. When the referenced car is newer than 2000, it modifies its color to
+     * white, otherwise to black.
+     *
+     * @param id the id
+     */
     public void updateConditionally(int id) {
-        SqlSession session = sessionFactory.getSqlSessionFactory().openSession();
-        session.update("Car.paintCarConditionally", id);
-        session.commit();
-        session.close();
+        sessionHandler.update("Car.paintCarConditionally", id, int.class);
     }
 
+    /**
+     * Deletes a car record by its ID.
+     *
+     * @param id the id
+     */
     public void delete(Integer id) {
-        SqlSession session = sessionFactory.getSqlSessionFactory().openSession();
-        session.delete("Car.deleteCar", id);
-        session.commit();
-        session.close();
+        sessionHandler.delete("Car.deleteCar", id, int.class);
     }
 
+    /**
+     * Cleans database, deletes every record.
+     */
     public void cleanDatabase() {
-        SqlSession session = sessionFactory.getSqlSessionFactory().openSession();
-        session.delete("Car.cleanDatabase");
-        session.commit();
-        session.close();
+        sessionHandler.delete("Car.cleanDatabase");
     }
 
+    /**
+     * Gets one car by its ID.
+     *
+     * @param id the id
+     * @return the data
+     */
     public Car getData(Integer id) {
-        SqlSession session = sessionFactory.getSqlSessionFactory().openSession();
-        Car car = session.selectOne("Car.selectCar", id);
-        session.close();
-        return car;
+        return sessionHandler.select("Car.selectCar", id, int.class);
     }
 
+    /**
+     * Gets all car records.
+     *
+     * @return the all data
+     */
     public List<Car> getAllData() {
-        SqlSession session = sessionFactory.getSqlSessionFactory().openSession();
-        List<Car> cars = session.selectList("Car.selectAllCar");
-        session.close();
-        return cars;
+        return sessionHandler.select("Car.selectAllCar");
     }
 }
