@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Car">
+
+    <resultMap id="carResultMap" type="car">
+        <id property="id" column="CAR_ID"/>
+        <result property="color" column="COLOR"/>
+        <result property="brand" column="BRAND"/>
+        <result property="model" column="MODEL"/>
+        <result property="manufactureDate" column="MANUFACTURE_DATE"/>
+    </resultMap>
+
+    <select id="selectAllCar" resultType="car" resultMap="carResultMap">
+        SELECT car_id, color, brand, model, manufacture_date FROM car
+    </select>
+
+    <select id="selectCar" resultType="car" parameterType="int" resultMap="carResultMap">
+        SELECT car_id, color, brand, model, manufacture_date FROM car WHERE car_id=#{id}
+    </select>
+
+    <insert id="insertCar" parameterType="car" keyProperty="id">
+        INSERT INTO car(car_id, color, brand, model, manufacture_date) VALUES(#{id}, #{color}, #{brand}, #{model}, #{manufactureDate})
+    </insert>
+
+    <update id="paintCar" parameterType="car">
+        UPDATE car SET color=#{color} WHERE car_id=#{id}
+    </update>
+
+    <update id="paintCarConditionally" parameterType="int">
+        UPDATE car SET
+            <choose>
+                <when test="manufacture_date > 2000">
+                    color = 'white'
+                </when>
+                <otherwise>
+                    color = 'black'
+                </otherwise>
+            </choose>
+        WHERE car_id=#{id}
+    </update>
+
+    <delete id="deleteCar" parameterType="int">
+        DELETE FROM car WHERE car_id=#{id}
+    </delete>
+
+    <delete id="cleanDatabase">
+        DELETE FROM car
+    </delete>
+</mapper>
